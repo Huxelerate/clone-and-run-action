@@ -1,0 +1,34 @@
+# action.yml
+name: 'Clone and Run Action'
+description: 'Allows to clone a custom repository of an organization and run a custom command'
+
+inputs:
+  user:
+    description: 'GitHub user'
+    required: true
+
+  token:
+    description: 'GitHub PAT token'
+    required: true
+
+  organization:
+    description: 'GitHub organization'
+    required: true
+
+  repository:
+    description: 'GitHub repository'
+    required: true
+
+  branch:
+    description: 'Branch to checkout'
+    required: true
+
+  command:
+    description: 'Command to run'
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+    - run: $GITHUB_ACTION_PATH/run.sh ${{ inputs.user }} ${{ inputs.token }} ${{ inputs.organization }} ${{ inputs.repository }} ${{ inputs.branch }} ${{ inputs.command }}
+      shell: bash
