@@ -15,10 +15,11 @@ RUN_CMD="$6"
 git config --global credential.helper cache
 git config --global credential.helper 'cache --timeout=3600'
 
-git clone --single-branch --branch ${BRANCH} "https://${USERNAME}:${TOKEN}@github.com/${ORGANIZATION}/${REPOSITORY}.git"
+git clone "https://${USERNAME}:${TOKEN}@github.com/${ORGANIZATION}/${REPOSITORY}.git"
 
 pushd ${REPOSITORY}
 
+git checkout ${BRANCH}
 git submodule update --init --recursive
 
 if eval ${RUN_CMD}; then
